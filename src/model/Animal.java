@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public abstract class Animal {
     private String AnimalName;
     private Date B_Day;
     private List<String> commands;
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public Animal(String animalName, Date b_Day, List<String> commands) {
         AnimalName = animalName;
@@ -43,7 +45,7 @@ public abstract class Animal {
     public String toString() {
         return "Animal{" +
                 "AnimalName='" + AnimalName + '\'' +
-                ", B_Day=" + B_Day +
+                ", B_Day=" + formatter.format(B_Day) +
                 ", commands=" + commands +
                 '}';
     }
