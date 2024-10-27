@@ -1,0 +1,257 @@
+7.
+deviluke@deviluke-VirtualBox:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.4.3 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> CREATE database HumanFriends;
+Query OK, 1 row affected (0,01 sec)
+
+mysql> USE HumanFriends;
+Database changed
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| HumanFriends       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0,00 sec)
+
+8.
+mysql> CREATE TABLE Animals ( AnimalsTypeID INT AUTO_INCREMENT PRIMARY KEY, TypeName VARCHAR(20) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> CREATE TABLE Pets ( PetsTypeID INT AUTO_INCREMENT PRIMARY KEY, PetsTypeName VARCHAR
+(20), AnimalTypeNum INT, FOREIGN KEY (AnimalTypeNum) REFERENCES Animals (AnimalsTypeID) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> CREATE TABLE PackAnimals ( PackAnimalsTypeID INT AUTO_INCREMENT PRIMARY KEY, PackAnimalsTypeName VARCHAR (20), AnimalTypeNum INT, FOREIGN KEY (AnimalTypeNum) REFERENCES Animal
+s (AnimalsTypeID) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> CREATE TABLE Cats ( CatID INT AUTO_INCREMENT PRIMARY KEY, CatName VARCHAR (20), B_Day DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES Pets (PetsTypeID) );
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> CREATE TABLE Dogs ( DogID INT AUTO_INCREMENT PRIMARY KEY, DogName VARCHAR (20), B_Da
+y DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES Pets (PetsTypeID
+) );
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> CREATE TABLE Hamsters ( HamsterID INT AUTO_INCREMENT PRIMARY KEY, HamsterName VARCHA
+R (20), B_Day DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES Pets
+ (PetsTypeID) );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> CREATE TABLE Horses ( HorseID INT AUTO_INCREMENT PRIMARY KEY, HorseName VARCHAR (20)
+, B_Day DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES PackAnimal
+s (PackAnimalsTypeID) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> CREATE TABLE Camels ( CamelID INT AUTO_INCREMENT PRIMARY KEY, CamelName VARCHAR (20)
+, B_Day DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES PackAnimal
+s (PackAnimalsTypeID) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> CREATE TABLE Donkeys ( DonkeyID INT AUTO_INCREMENT PRIMARY KEY, DonkeyName VARCHAR (
+20), B_Day DATE, Commands VARCHAR(100), TypeID INT, FOREIGN KEY (TypeID) REFERENCES PackAni
+mals (PackAnimalsTypeID) );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> show tables
+    -> ;
++------------------------+
+| Tables_in_HumanFriends |
++------------------------+
+| Animals                |
+| Camels                 |
+| Cats                   |
+| Dogs                   |
+| Donkeys                |
+| Hamsters               |
+| Horses                 |
+| PackAnimals            |
+| Pets                   |
++------------------------+
+9 rows in set (0,00 sec)
+
+9.
+mysql> INSERT INTO Animals (TypeName) VALUES ('Pet'), ('PackAnimal');
+Query OK, 2 rows affected (0,02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Pets (PetsTypeName, AnimalTypeNum) VALUES ('Cat', 1), ('Dog', 1), ('Hamster', 1);
+Query OK, 3 rows affected (0,01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO PackAnimals (PackAnimalsTypeName, AnimalTypeNum) VALUES ('Horse', 2), ('Camel', 2), ('Donkey', 2);
+Query OK, 3 rows affected (0,01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Cats (CatName, B_Day, Commands, TypeID) VALUES ('Alpha', '2023-08-15', 'play, eat, stop', 1);
+Query OK, 1 row affected (0,01 sec)
+
+mysql> INSERT INTO Dogs (DogName, B_Day, Commands, TypeID) VALUES ('Bravo', '2022-10-26', 'play, sit, spin around', 2);
+Query OK, 1 row affected (0,01 sec)
+
+mysql> INSERT INTO Hamsters (HamsterName, B_Day, Commands, TypeID) VALUES ('Charlie', '2024-01-05', 'run', 3);
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Horses (HorseName, B_Day, Commands, TypeID) VALUES ('Delta', '2021-06-07
+', 'gallop, eat, wait', 1);
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Camels (CamelName, B_Day, Commands, TypeID) VALUES ('Echo', '2018-09-18'
+, 'drink, sit down', 2);
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Donkeys (DonkeyName, B_Day, Commands, TypeID) VALUES ('Foxtrot', '2022-12-20', 'drink, carry', 3);
+Query OK, 1 row affected (0,00 sec)
+
+mysql> SELECT * FROM Animals
+    -> ;
++---------------+------------+
+| AnimalsTypeID | TypeName   |
++---------------+------------+
+|             1 | Pet        |
+|             2 | PackAnimal |
++---------------+------------+
+2 rows in set (0,00 sec)
+
+mysql> SELECT * FROM Pets;
++------------+--------------+---------------+
+| PetsTypeID | PetsTypeName | AnimalTypeNum |
++------------+--------------+---------------+
+|          1 | Cat          |             1 |
+|          2 | Dog          |             1 |
+|          3 | Hamster      |             1 |
++------------+--------------+---------------+
+3 rows in set (0,00 sec)
+
+mysql> SELECT * FROM PackAnimals;
++-------------------+---------------------+---------------+
+| PackAnimalsTypeID | PackAnimalsTypeName | AnimalTypeNum |
++-------------------+---------------------+---------------+
+|                 1 | Horse               |             2 |
+|                 2 | Camel               |             2 |
+|                 3 | Donkey              |             2 |
++-------------------+---------------------+---------------+
+3 rows in set (0,00 sec)
+
+mysql> SELECT * FROM Cats;
++-------+---------+------------+-----------------+--------+
+| CatID | CatName | B_Day      | Commands        | TypeID |
++-------+---------+------------+-----------------+--------+
+|     1 | Alpha   | 2023-08-15 | play, eat, stop |      1 |
++-------+---------+------------+-----------------+--------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Dogs;
++-------+---------+------------+------------------------+--------+
+| DogID | DogName | B_Day      | Commands               | TypeID |
++-------+---------+------------+------------------------+--------+
+|     1 | Bravo   | 2022-10-26 | play, sit, spin around |      2 |
++-------+---------+------------+------------------------+--------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Hamsters;
++-----------+-------------+------------+----------+--------+
+| HamsterID | HamsterName | B_Day      | Commands | TypeID |
++-----------+-------------+------------+----------+--------+
+|         2 | Charlie     | 2024-01-05 | run      |      3 |
++-----------+-------------+------------+----------+--------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Horses;
++---------+-----------+------------+-------------------+--------+
+| HorseID | HorseName | B_Day      | Commands          | TypeID |
++---------+-----------+------------+-------------------+--------+
+|       1 | Delta     | 2021-06-07 | gallop, eat, wait |      1 |
++---------+-----------+------------+-------------------+--------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Camels;
++---------+-----------+------------+-----------------+--------+
+| CamelID | CamelName | B_Day      | Commands        | TypeID |
++---------+-----------+------------+-----------------+--------+
+|       1 | Echo      | 2018-09-18 | drink, sit down |      2 |
++---------+-----------+------------+-----------------+--------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Donkeys;
++----------+------------+------------+--------------+--------+
+| DonkeyID | DonkeyName | B_Day      | Commands     | TypeID |
++----------+------------+------------+--------------+--------+
+|        1 | Foxtrot    | 2022-12-20 | drink, carry |      3 |
++----------+------------+------------+--------------+--------+
+1 row in set (0,00 sec)
+
+10.
+
+mysql> DELETE FROM Camels;
+Query OK, 1 row affected (0,01 sec)
+
+mysql> SELECT * FROM Camels;
+Empty set (0,00 sec)
+
+mysql> CREATE TABLE HorsesPlusDonkeys AS SELECT HorseName AS PackAnimalName, B_Day, command
+s, TypeID FROM Horses UNION SELECT DonkeyName AS PackAnimalName, B_Day, commands, TypeID FR
+OM Donkeys;
+Query OK, 2 rows affected (0,02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM HorsesPlusDonkeys;
++----------------+------------+-------------------+--------+
+| PackAnimalName | B_Day      | commands          | TypeID |
++----------------+------------+-------------------+--------+
+| Delta          | 2021-06-07 | gallop, eat, wait |      1 |
+| Foxtrot        | 2022-12-20 | drink, carry      |      3 |
++----------------+------------+-------------------+--------+
+2 rows in set (0,00 sec)
+
+11.
+
+mysql> CREATE TABLE YoungAnimals AS SELECT AnimalName, B_Day, Commands, TypeID, TIMESTAMPDIFF(MONTH, B_Day, CURDATE()) AS AgeInMonths FROM ( SELECT CatName AS AnimalName, B_Day, Commands, TypeID FROM Cats UNION SELECT DogName AS AnimalName, B_Day, Commands, TypeID FROM Dogs UNION SELECT HamsterName as AnimalName, B_Day, Commands, TypeID FROM Hamsters UNION SELECT PackAnimalName as AnimalName, B_Day, Commands, TypeID FROM HorsesPlusDonkeys) as AnimalsPlus WHERE TIMESTAMPDIFF(MONTH, B_Day, CURDATE()) BETWEEN 12 and 36;
+Query OK, 3 rows affected (0,02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM YoungAnimals;
++------------+------------+------------------------+--------+-------------+
+| AnimalName | B_Day      | Commands               | TypeID | AgeInMonths |
++------------+------------+------------------------+--------+-------------+
+| Alpha      | 2023-08-15 | play, eat, stop        |      1 |          14 |
+| Bravo      | 2022-10-26 | play, sit, spin around |      2 |          24 |
+| Foxtrot    | 2022-12-20 | drink, carry           |      3 |          22 |
++------------+------------+------------------------+--------+-------------+
+3 rows in set (0,00 sec)
+
+12.
+
+mysql> CREATE TABLE FinalAnimals AS SELECT CatName as AnimalName, B_Day, Commands, TypeID FROM Cats UNION SELECT DogName as AnimalName, B_Day, Commands, TypeID FROM Dogs UNION SELECT HamsterName as AnimalName, B_Day, Commands, TypeID FROM Hamsters UNION SELECT PackAnimalName as AnimalName, B_Day, Commands, TypeID FROM HorsesPlusDonkeys UNION SELECT AnimalName as AnimalName, B_Day, Commands, TypeID FROM YoungAnimals;
+Query OK, 5 rows affected (0,03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> Select * from FinalAnimals
+    -> ;
++------------+------------+------------------------+--------+
+| AnimalName | B_Day      | Commands               | TypeID |
++------------+------------+------------------------+--------+
+| Alpha      | 2023-08-15 | play, eat, stop        |      1 |
+| Bravo      | 2022-10-26 | play, sit, spin around |      2 |
+| Charlie    | 2024-01-05 | run                    |      3 |
+| Delta      | 2021-06-07 | gallop, eat, wait      |      1 |
+| Foxtrot    | 2022-12-20 | drink, carry           |      3 |
++------------+------------+------------------------+--------+
+5 rows in set (0,00 sec)
+
