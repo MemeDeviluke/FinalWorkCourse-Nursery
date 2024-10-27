@@ -1,0 +1,7 @@
+deviluke@deviluke-VirtualBox:~/test$ mkdir newdir
+deviluke@deviluke-VirtualBox:~/test$ mv human_friends.txt newdir
+deviluke@deviluke-VirtualBox:~/test$ ls
+newdir  pack_animals.txt  pets.txt
+deviluke@deviluke-VirtualBox:~/test$ ls newdir
+human_friends.txt
+deviluke@deviluke-VirtualBox:~/test$ 
