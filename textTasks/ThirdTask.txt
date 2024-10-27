@@ -1,0 +1,22 @@
+deviluke@deviluke-VirtualBox:~/test$ wget -с https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
+deviluke@deviluke-VirtualBox:~/test$ sudo dpkg -i mysql-apt-config_0.8.30-1_all.deb
+deviluke@deviluke-VirtualBox:~/test$ sudo apt update
+deviluke@deviluke-VirtualBox:~/test$ sudo apt install mysql-server
+
+deviluke@deviluke-VirtualBox:~/test$ systemctl status mysql
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/usr/lib/systemd/system/mysql.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2024-10-26 17:23:40 MSK; 1min 25s ago
+       Docs: man:mysqld(8)
+             http://dev.mysql.com/doc/refman/en/using-systemd.html
+   Main PID: 43033 (mysqld)
+     Status: "Server is operational"
+      Tasks: 36 (limit: 9442)
+     Memory: 428.8M (peak: 443.3M)
+        CPU: 2.345s
+     CGroup: /system.slice/mysql.service
+             └─43033 /usr/sbin/mysqld
+
+окт 26 17:23:39 deviluke-VirtualBox systemd[1]: Starting mysql.service - MySQL Community Server...
+окт 26 17:23:40 deviluke-VirtualBox systemd[1]: Started mysql.service - MySQL Community Server.
+
