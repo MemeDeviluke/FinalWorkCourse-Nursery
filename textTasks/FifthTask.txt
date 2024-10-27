@@ -1,0 +1,39 @@
+  200  mkdir test
+  201  cd test
+  202  ls
+  203  cat <<EOT >> pets.txt
+cat
+dog
+hamster
+EOT
+
+  204  cat pets.txt
+  205  cat <<EOT >> pack_animals.txt
+horse
+camel
+donkey
+EOT
+
+  206  cat pack_animals.txt
+  207  cat pet.txt pack_animals.txt > animals.txt
+  208  cat pets.txt pack_animals.txt > animals.txt
+  209  cat animals.txt
+  210  mv animals.txt human_friends.txt
+  211  ls
+  212  mkdir newdir
+  213  mv human_friends.txt newdir
+  214  ls
+  215  ls newdir
+  216  wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
+  217  wget -с https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
+  218  cd Загрузки
+  219  sudo dpkg -i mysql-apt-config_0.8.30-1_all.deb
+  220  sudo apt update
+  221  sudo apt install mysql-server
+  222  systemctl status mysql
+  223  wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+  224  sudo dpkg - i mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+  225  sudo dpkg -i mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+  226  sudo dpkg -r mysql-connector-j
+  227  sudo apt-get autoremove
+  228  history
